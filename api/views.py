@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse, Http404
 
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, authentication_classes, permission_classes, renderer_classes
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -17,6 +18,7 @@ from rest_framework import status
 
 
 @api_view(['GET'])
+@renderer_classes([JSONRenderer])
 def apiOverview(request):
     api_urls = {
         'List': '/hospital_list/',
@@ -29,6 +31,7 @@ def apiOverview(request):
 
 
 @api_view(['GET'])
+@renderer_classes([JSONRenderer])
 def HospitalList(request):
     hospitals = Hospbeds.objects.all()
     serializer = Hospbedserializer(hospitals, many=True)
@@ -36,6 +39,7 @@ def HospitalList(request):
 
 
 @api_view(['GET'])
+@renderer_classes([JSONRenderer])
 def HospitalDetails(request, pk):
     try:
         hospital = Hospbeds.objects.get(id=pk)
@@ -48,6 +52,7 @@ def HospitalDetails(request, pk):
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
+@renderer_classes([JSONRenderer])
 def HospitalAdd(request):
     serialize = Hospbedserializer(data=request.data)
     if serialize.is_valid():
@@ -56,9 +61,10 @@ def HospitalAdd(request):
     return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-@api_view(['POST'])
+@renderer_classes([JSONRenderer])
 def HospitalUpdate(request, pk):
     try:
         hospital = Hospbeds.objects.get(id=pk)
@@ -74,6 +80,7 @@ def HospitalUpdate(request, pk):
 @api_view(['DELETE'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
+@renderer_classes([JSONRenderer])
 def HospitalDelete(request, pk):
     try:
         hospital = Hospbeds.objects.get(id=pk)
