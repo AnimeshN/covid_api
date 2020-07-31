@@ -50,8 +50,8 @@ def HospitalDetails(request, pk):
 
 
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
 @renderer_classes([JSONRenderer])
 def HospitalAdd(request):
     serialize = Hospbedserializer(data=request.data)

@@ -18,3 +18,5 @@ class Hospbeds(models.Model):
     cvo = models.BigIntegerField(blank=True, null=True)
     coo = models.BigIntegerField(blank=True, null=True)
     cio = models.BigIntegerField(blank=True, null=True)
+    updation_date_time = models.DateTimeField('date_published', auto_now=True)
+

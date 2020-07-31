@@ -141,7 +141,8 @@ REST_FRAMWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-    )
+    ),
+    'DATETIME_FORMAT': "%Y-%m-%d - %H:%M:%S", 
 }
 
 
@@ -168,3 +169,5 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+
+TIME_ZONE = 'Asia/Kolkata'
