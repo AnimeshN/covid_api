@@ -50,8 +50,8 @@ def HospitalDetails(request, pk):
 
 
 @api_view(['POST'])
-# @authentication_classes([TokenAuthentication])
-# @permission_classes([IsAuthenticated])
+#@authentication_classes([TokenAuthentication])
+#@permission_classes([IsAuthenticated])
 @renderer_classes([JSONRenderer])
 def HospitalAdd(request):
     serialize = Hospbedserializer(data=request.data)
@@ -61,9 +61,9 @@ def HospitalAdd(request):
     return Response(serialize.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+#@authentication_classes([TokenAuthentication])
+#@permission_classes([IsAuthenticated])
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 @renderer_classes([JSONRenderer])
 def HospitalUpdate(request, pk):
     try:
